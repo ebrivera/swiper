@@ -11,14 +11,15 @@ const oauth2Client = new google.auth.OAuth2(
 export async function GET() {
   try {
     const url = oauth2Client.generateAuthUrl({
-      access_type: "offline", // Ensure refresh token is returned
-      scope: "https://www.googleapis.com/auth/gmail.readonly", // Scope of access
+      access_type: "offline",
+      scope: "https://www.googleapis.com/auth/gmail.readonly",
     });
-    // Redirect the user to the authorization URL
-    return NextResponse.redirect(url);
+    return NextResponse.json({ url });
   } catch (error) {
-    console.error(error);
-    // Respond with an error message if URL generation fails
-    return new Response("Failed to generate OAuth2 URL", { status: 500 });
+    console.error("Error generating OAuth URL:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

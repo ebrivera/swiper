@@ -8,8 +8,8 @@ const oauth2Client = new google.auth.OAuth2(
   "http://localhost:3000/api/gmail/callback" // Change this to your redirect URL
 );
 
-export async function GET(req) {
-  const { searchParams } = new URL(req.url);
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   try {
     const { tokens } = await oauth2Client.getToken(code);
@@ -17,9 +17,12 @@ export async function GET(req) {
 
     // Save the tokens in a session or database if necessary
 
-    return NextResponse.redirect("/home"); // Redirect to the home page after successful authentication
+    return NextResponse.redirect(new URL("/home", request.url));
   } catch (error) {
     console.error(error);
-    return new Response("Failed to authenticate", { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to authenticate" },
+      { status: 500 }
+    );
   }
 }
