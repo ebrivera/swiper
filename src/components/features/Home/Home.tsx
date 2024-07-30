@@ -1,13 +1,23 @@
 // src/features/Home/HomePage.tsx
 import React from "react";
+import { signInWithGoogle, signOutUser } from "../../../services/firebaseAuth";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-500 mb-4">
-        Welcome to Next.js with Tailwind CSS and DaisyUI!
-      </h1>
-      <button className="btn btn-primary">Click Me</button>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold mb-8">Welcome to Gmail-Swipe</h1>
+      <button
+        className="btn btn-primary mb-4"
+        onClick={signInWithGoogle}
+      >
+        Sign In with Google
+      </button>
+      <button
+        className="btn btn-secondary"
+        onClick={signOutUser}
+      >
+        Sign Out
+      </button>
     </div>
   );
 };
