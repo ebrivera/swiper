@@ -1,26 +1,16 @@
-// src/services/firebaseAuth.js
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-} from "firebase/auth";
-import { app } from "./firebaseConfig";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
-const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
     const user = result.user;
-    // Store user and token as needed
-    console.log("User Info: ", user);
-    console.log("Access Token: ", token);
+    console.log("User signed in:", user);
+    // Handle user authentication state here (e.g., store in context or Redux)
   } catch (error) {
-    console.error("Error during sign-in: ", error);
+    console.error("Error signing in with Google:", error);
   }
 };
 
@@ -28,8 +18,9 @@ const signOutUser = async () => {
   try {
     await signOut(auth);
     console.log("User signed out");
+    // Handle user sign-out state here (e.g., update context or Redux)
   } catch (error) {
-    console.error("Error during sign-out: ", error);
+    console.error("Error signing out:", error);
   }
 };
 
