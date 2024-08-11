@@ -1,4 +1,4 @@
-// src/features/Home/HomePage.tsx
+'use client'
 import React from "react";
 import { signInWithGoogle, signOutUser } from "../../../services/firebaseAuth";
 
