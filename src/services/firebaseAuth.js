@@ -20,7 +20,7 @@ const signOutUser = async () => {
     console.log("User signed out");
     // Handle user sign-out state here (e.g., update context or Redux)
   } catch (error) {
-    console.error("Error signing out:", error);
+    console.error("Error signing out: ", error);
   }
 };
 
