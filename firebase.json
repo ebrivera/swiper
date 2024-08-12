@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "swiper-5ed13-7e569",
     "public": "public",
     "ignore": [
       "firebase.json",
